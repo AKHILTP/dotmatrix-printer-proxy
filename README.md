@@ -14,12 +14,32 @@ A lightweight Flask-based API service to send raw text data directly to a Dot Ma
 - 🛠️ Easily extendable for network printers or direct printer APIs
 
 ---
+### 📦 Prerequisites Installing Python (Windows)
 
-## 📦 Prerequisites
-
+If Python is not installed:
 - Python 3.7.3 (for Odoo 14) or Python 3.8.20 (for Odoo 15+)
 - Add Python to your system PATH during installation
-- `pip` installed for managing Python packages
+
+- Run `install_python.bat` by double-clicking it.
+- This will install Python 3.8.20 silently and add it to your PATH.
+- After installation, open a new CMD and verify with:
+
+```bash
+python --version
+
+
+### 📦 Installing Python and dependencies(Linux)
+
+Run the following commands in the terminal:
+
+```bash
+chmod +x install_python.sh
+./install_python.sh
+
+After this, you can create and activate a virtual environment, and install your Python requirements:
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 
 ---
 
@@ -27,9 +47,8 @@ A lightweight Flask-based API service to send raw text data directly to a Dot Ma
 
 ### 1. Clone the Repository
 
-```bash
 git clone https://github.com/AKHILTP/dotmatrix-printer-proxy
-cd dotmatrix-printer-proxy
+cd git/dotmatrix-printer-proxy
 
 #Create & Activate a Virtual Environmen
 python -m venv venv
