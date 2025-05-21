@@ -17,6 +17,7 @@ share/python-wheels/
 # Compiled Python files
 *.py[co]
 __pycache__/
+*.pyc
 
 # setup.py egg_info
 eggs/
