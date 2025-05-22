@@ -5,12 +5,17 @@ import platform
 import subprocess
 
 import logging
+# Try importing Windows-only modules
+# Optional: Uncomment if using Windows printer API
+# try:
+#     import win32api
+#     import win32print
+# except ImportError:
+#     win32api = None
+#     win32print = None
 
 _logger = logging.getLogger(__name__)
 
-
-# Optional: Uncomment if using Windows printer API
-# import win32print
 
 app = Flask(__name__)
 CORS(app)
@@ -49,21 +54,30 @@ def dotmatrix_print():
         )
         if system_os == "Windows":
             os.startfile(TEMPPRINT_FILE, "print")
+            # if not win32api or not win32print:
+            #     return jsonify({'status': 'error', 'message': 'pywin32 not available on this system'}), 500
+            # printer_name = win32print.GetDefaultPrinter()
+            # _logger.info(f"Using printer: {printer_name}")
+
+            # # Print using Windows ShellExecute
+            # win32api.ShellExecute(
+            #     0,
+            #     "print",
+            #     TEMPPRINT_FILE,
+            #     None,
+            #     ".",
+            #     0
+            # )
         else:
             # Linux/macOS: Use lp or lpr
-            subprocess.run(["lp", TEMPPRINT_FILE], check=True)
+            try:
+                subprocess.run(["lp", TEMPPRINT_FILE], check=True)
+            except Exception as linux_error:
+                # Try with lpr if lp fails
+                subprocess.run(["lpr", TEMPPRINT_FILE], check=True)
 
         return jsonify({'status': 'OK'})
         
-        # # Write to temp file
-        # with open(TEMPPRINT_FILE, 'w', encoding='us-ascii') as log_file:
-        #     log_file.write(printer_data)
-        #     log_file.write('\n')
-
-        # # Print using default system print
-        # os.startfile(TEMPPRINT_FILE, "print")
-
-        # return jsonify({'status': 'OK'})
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
