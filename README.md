@@ -40,8 +40,8 @@ python --version
 
 2. **Create & Activate a Virtual Environment**:
 
-      python -m venv venv
-      venv\Scripts\activate
+   - python -m venv venv
+   - env\Scripts\activate
 
 3. **Install Required Packages**:
 
@@ -60,8 +60,8 @@ python --version
 
 1. **Make the installation script- run it**:
 
-   chmod +x install_python.sh
-   ./install_python.sh
+   - chmod +x install_python.sh
+   - ./install_python.sh
 
 2. **Create & Activate a Virtual Environment**:
 
@@ -84,8 +84,8 @@ python --version
 
 5. **Start the Flask Application**:
 
-   chmod +x start.sh
-   ./start.sh
+   - chmod +x start.sh
+   - ./start.sh
 
 --------------
 ## 🛠️ API Usage
