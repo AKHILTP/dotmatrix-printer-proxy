@@ -1,6 +1,13 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
+import platform
+import subprocess
+
+import logging
+
+_logger = logging.getLogger(__name__)
+
 
 # Optional: Uncomment if using Windows printer API
 # import win32print
@@ -10,10 +17,11 @@ CORS(app)
 
 TEMPPRINT_FILE = 'tempprint.txt'
 
+"""use encoding='utf-8' instead 'us-ascii' to support characters from all world languages"""
 def create_default_files():
     """Ensure required files exist"""
     if not os.path.exists(TEMPPRINT_FILE):
-        with open(TEMPPRINT_FILE, 'w', encoding='us-ascii') as fp:
+        with open(TEMPPRINT_FILE, 'w', encoding='utf-8') as fp:
             pass
 
 @app.route('/dotmatrix/print', methods=['POST'])
@@ -26,19 +34,36 @@ def dotmatrix_print():
         else:
             # Fallback to form data
             printer_data = request.form.get('printer_data')
-
+        
         if not printer_data:
             return jsonify({'status': 'error', 'message': 'Missing printer_data'}), 400
 
-        # Write to temp file
-        with open(TEMPPRINT_FILE, 'w', encoding='us-ascii') as log_file:
-            log_file.write(printer_data)
-            log_file.write('\n')
+        # Save data to file
+        with open(TEMPPRINT_FILE, 'w', encoding='utf-8') as log_file:
+            log_file.write(printer_data + '\n')
 
-        # Print using default system print
-        os.startfile(TEMPPRINT_FILE, "print")
+        # Detect OS and print accordingly
+        system_os = platform.system()
+        _logger.info(
+            "system_os %s" % (system_os)
+        )
+        if system_os == "Windows":
+            os.startfile(TEMPPRINT_FILE, "print")
+        else:
+            # Linux/macOS: Use lp or lpr
+            subprocess.run(["lp", TEMPPRINT_FILE], check=True)
 
         return jsonify({'status': 'OK'})
+        
+        # # Write to temp file
+        # with open(TEMPPRINT_FILE, 'w', encoding='us-ascii') as log_file:
+        #     log_file.write(printer_data)
+        #     log_file.write('\n')
+
+        # # Print using default system print
+        # os.startfile(TEMPPRINT_FILE, "print")
+
+        # return jsonify({'status': 'OK'})
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
@@ -47,35 +72,6 @@ if __name__ == '__main__':
     create_default_files()
     # Run Flask's built-in dev server on port 8000
     app.run(host='127.0.0.1', port=8000, debug=True)
-
-
-# old proxy for v-14 odoo dotmatrix - Below
-
-# from flask import Flask
-# from flask import jsonify
-# from flask import request
-# from flask_cors import CORS
-# # import win32print
-# import os
-# # from waitress import serve
-
-
-
-# app = Flask(__name__)
-# CORS(app)
-
-# TEMPPRINT_FILE = 'tempprint.txt'
-
-# def create_default_files():
-#     """
-#     Generate default files for the API server
-#     :return:
-#     """
-
-
-#     if not os.path.exists(TEMPPRINT_FILE):
-#         fp = open(TEMPPRINT_FILE, 'x', encoding="us-ascii")  # pylint: disable=invalid-name,consider-using-with
-#         fp.close()
 
 
 # @app.route('/dotmatrix/print', methods=['POST'])
@@ -97,6 +93,3 @@ if __name__ == '__main__':
 #     # win32print.EndDocPrinter(p)
 #     # win32print.ClosePrinter(p)
     
-#     return jsonify({'status': 'OK'})
-# if __name__ == '__main__':
-#     create_default_files()
