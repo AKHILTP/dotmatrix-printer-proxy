@@ -45,7 +45,7 @@ python --version
 
 3. **Install Required Packages**:
 
-      pip install -r requirements.txt
+   - pip install -r requirements.txt
 
 4. **Start the Flask Application**:
 
@@ -65,17 +65,17 @@ python --version
 
 2. **Create & Activate a Virtual Environment**:
 
-   python3 -m venv venv
-   source venv/bin/activate
+   - python3 -m venv venv
+   - source venv/bin/activate
 
 3. **Install Required Packages**:
 
-   pip install -r requirements.txt
+   - pip install -r requirements.txt
 
 
 4. **Ensure CUPS is Installed and Printer is Not Paused**:
 
-   sudo apt install cups
+   - sudo apt install cups
 
    * Make sure:
 
@@ -86,7 +86,6 @@ python --version
 
    - chmod +x start.sh
    - ./start.sh
-
 --------------
 ## 🛠️ API Usage
 
@@ -98,11 +97,10 @@ python --version
 
 * **Body:**
 
-  ```json
+  json
   {
     "printer_data": "Your raw text data to print"
   }
-  ```
 
 ## 📬 Support
 
