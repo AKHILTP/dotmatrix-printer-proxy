@@ -1,19 +1,48 @@
 # 🖨️ Dotmatrix Printer Proxy API
 
-A lightweight Flask-based API service to send raw text data directly to a Printer from Odoo (v14 or v15+), or any system via a simple HTTP request. Supports both Windows and Linux environments.
+A lightweight **Flask-based API service** to send raw text directly to a Dotmatrix Printer from **Odoo (v14/v15+)** or any system via HTTP requests.  
+Supports **Windows, Linux, and macOS** 🪟🐧🍎
+
+![Dotmatrix Printer Proxy](https://img.shields.io/badge/Dotmatrix-Printer%20Proxy-blueviolet?style=for-the-badge&logo=print)
+![CUPS Enabled](https://img.shields.io/badge/CUPS-Enabled-orange?style=for-the-badge&logo=linux)
+![Odoo Ready](https://img.shields.io/badge/Odoo-Ready-purple?style=for-the-badge&logo=odoo)
+![Flask API](https://img.shields.io/badge/Flask-API-success?style=for-the-badge&logo=flask)
+![Cross Platform](https://img.shields.io/badge/OS-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=for-the-badge&logo=windows)
+![MIT License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
 ## 🚀 Features
 
-* ✅ Simple API to receive and print data
-* 🧾 Compatible with **Odoo v14** (Python 3.7.3) and **v15+** (Python 3.8.20)
-* 🪟 Supports **Windows **Linux **Mac `**
-* 🔒 CORS enabled (API accessible from browsers or Odoo)
-* 🛠️ Easily extendable for network printers or direct printer APIs
+- ✅ Simple API to receive and print data  
+- 🧾 Compatible with **Odoo v14 (Python 3.7.3)** and **v15+ (Python 3.8.20)**  
+- 🌍 Cross-platform support (**Windows, Linux, macOS**)  
+- 🔒 CORS enabled (accessible from browsers or Odoo)  
+- 🛠️ Easily extendable for network printers or direct printer APIs  
 
+---
+
+## 📸 Screenshots / Demo
+
+- Printer Proxy in action  
+![Printer Proxy Demo](assets/dot_matrix_1.png)
+
+---
+
+
+## 📥 Installation
+
+### 📌 Clone/Download
+
+1. url :-https://github.com/AKHILTP/dotmatrix-printer-proxy
+
+git clone https://github.com/AKHILTP/dotmatrix-printer-proxy
+
+2. download the ZIP and extract to:
+
+C:/ in Windows
+
+~/home/ in Linux/Ubuntu
 
 ## 🟦 Windows Setup Instructions
-
-### 📦 Prerequisites: Installing Python
 
 #If Python is not installed:
 
@@ -22,26 +51,21 @@ A lightweight Flask-based API service to send raw text data directly to a Printe
 
 or
 
-Alternatively, run `install_python.bat` by double-clicking it. This will install Python 3.8.20 silently and add it to your PATH.
+- Alternatively, run `install_python.bat` by double-clicking it. This will install Python 3.8.20 silently and add it to your PATH.
 
-#After installation, open a new CMD and verify with:
+#After installation, open a CMD and verify with:
 
-python --version
+command: python3 --version
 
+## 🟦 Steps
 
-### 📁 Setup Steps
-
-1. **Clone/download the Repository zip**:
-   -  url :-https://github.com/AKHILTP/dotmatrix-printer-proxy
-
-   -  CMD: open path to file
+1.  **OPen CMD: open path to file final path of folder**
       eg: cd dotmatrix-printer-proxy
-
 
 2. **Create & Activate a Virtual Environment**:
 
    - python -m venv venv
-   - env\Scripts\activate
+   - venv\Scripts\activate
 
 3. **Install Required Packages**:
 
@@ -50,30 +74,32 @@ python --version
 4. **Start the Flask Application**:
 
       * Double-click on `start.bat` in the proxy folder.
+      for shortcut for easy running can add to desktop
       * **Do not close the CMD terminal** as it keeps the server running.
 
 ---------------
 
 ## 🟦 Linux Setup Instructions
 
-### 📦 Prerequisites: Installing Python and Dependencies
+1.  **OPen CMD: open path to file final path of folder**
+      eg: cd dotmatrix-printer-proxy
 
-1. **Make the installation script- run it**:
+2. **Make the installation script- run it**:
 
    - chmod +x install_python.sh
    - ./install_python.sh
 
-2. **Create & Activate a Virtual Environment**:
+3. **Create & Activate a Virtual Environment**:
 
    - python3 -m venv venv
    - source venv/bin/activate
 
-3. **Install Required Packages**:
+4. **Install Required Packages**:
 
    - pip install -r requirements.txt
 
 
-4. **Ensure CUPS is Installed and Printer is Not Paused**:
+5. **Ensure CUPS is Installed and Printer is Not Paused**:
 
    - sudo apt install cups
 
@@ -82,11 +108,13 @@ python --version
      * The `lp` command is installed.
      * The printer is configured and not paused.
 
-5. **Start the Flask Application**:
+6. **Start the Flask Application**:
 
    - chmod +x start.sh
    - ./start.sh
 --------------
+
+For developer using this Printer
 ## 🛠️ API Usage
 
 * **Endpoint:** `http://localhost:8000/dotmatrix/print`
