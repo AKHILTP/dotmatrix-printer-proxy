@@ -1,3 +1,6 @@
 flask
-flask_cors
+flask-cors
 waitress
+python-escpos
+pdf2image
+pillow

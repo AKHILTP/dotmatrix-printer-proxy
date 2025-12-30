@@ -1,6 +1,6 @@
-# 🖨️ Dotmatrix Printer Proxy API
+# 🖨️ Printer Proxy (Dotmatrix + Thermal)
 
-A lightweight **Flask-based API service** to send raw text directly to a Dotmatrix Printer from **Odoo (v14/v15+)** or any system via HTTP requests.  
+A lightweight **Flask-based API service** to send raw text/img directly to a Dotmatrix Printer from **Odoo (v14/v15+)** or any system via HTTP requests.  
 Supports **Windows, Linux, and macOS** 🪟🐧🍎
 
 ![Dotmatrix Printer Proxy](https://img.shields.io/badge/Dotmatrix-Printer%20Proxy-blueviolet?style=for-the-badge&logo=print)
@@ -10,6 +10,10 @@ Supports **Windows, Linux, and macOS** 🪟🐧🍎
 ![Cross Platform](https://img.shields.io/badge/OS-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=for-the-badge&logo=windows)
 ![MIT License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
+## Supports:
+- 🧾 Dotmatrix printers (RAW text)
+- 🔥 Thermal printers (PDF)
+
 ## 🚀 Features
 
 - ✅ Simple API to receive and print data  
@@ -17,6 +21,8 @@ Supports **Windows, Linux, and macOS** 🪟🐧🍎
 - 🌍 Cross-platform support (**Windows, Linux, macOS**)  
 - 🔒 CORS enabled (accessible from browsers or Odoo)  
 - 🛠️ Easily extendable for network printers or direct printer APIs  
+- Single proxy for multiple printer types
+- POS-style auto printing
 
 ---
 
@@ -67,11 +73,37 @@ command: python3 --version
    - python -m venv venv
    - venv\Scripts\activate
 
+
 3. **Install Required Packages**:
 
-   - pip install -r requirements.txt
+   <!-- wsl --install
+   sudo apt update
+   sudo apt install -y python3-full python3-venv poppler-utils
 
-4. **Start the Flask Application**:
+   ** FOr go to local disc cpath.
+   📂 Windows C: drive path in WSL 
+   command :- cd /mnt/c
+   cd <path of the proxy folder> open
+   then.
+   python3 -m venv venv
+   source venv/bin/activate
+   
+   <!-- sudo apt install -y python3-pip libcups2-dev cups -->
+   <!-- pip3 install pycups
+
+   in window cmd prompt. --> 
+
+   - pip install -r requirements.txt
+   - python -m pip install --upgrade pip 
+      (if raise: not upgraded pip warning)
+
+4. **For thermal print to support image file**:
+   
+   - pip install pywin32 python-escpos
+   - pip install python-escpos pillow pdf2image pyusb
+   <!-- - brew install poppler -->
+
+5. **Start the Flask Application**:
 
       * Double-click on `start.bat` in the proxy folder.
       for shortcut for easy running can add to desktop
@@ -97,6 +129,7 @@ command: python3 --version
 4. **Install Required Packages**:
 
    - pip install -r requirements.txt
+   - pip install python-escpos
 
 
 5. **Ensure CUPS is Installed and Printer is Not Paused**:
@@ -108,13 +141,17 @@ command: python3 --version
      * The `lp` command is installed.
      * The printer is configured and not paused.
 
-6. **Start the Flask Application**:
+6. **For thermal print to support image file**:
+   
+   - sudo apt install cups poppler-utils
+
+7. **Start the Flask Application**:
 
    - chmod +x start.sh
    - ./start.sh
 --------------
 
-For developer using this Printer
+For developer using this Printer for Dotmatrix
 ## 🛠️ API Usage
 
 * **Endpoint:** `http://localhost:8000/dotmatrix/print`
@@ -124,11 +161,25 @@ For developer using this Printer
 * **Headers:** `Content-Type: application/json`
 
 * **Body:**
+POST /dotmatrix/print
 
   json
   {
     "printer_data": "Your raw text data to print"
   }
+
+
+For developer using this Printer for thermal
+
+
+POST /thermal/print
+json
+{
+  "pdf_base64": "<base64_pdf>",
+  "paper_width": 80
+}
+
+
 
 ## 📬 Support
 

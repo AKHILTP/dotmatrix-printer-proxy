@@ -11,5 +11,5 @@ else
     exit 1
 fi
 
-echo "Starting Dotmatrix Printer Proxy..."
+echo "Starting Printer Proxy..."
 waitress-serve --port=8000 printer_app:app
