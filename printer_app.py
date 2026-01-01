@@ -122,7 +122,12 @@ def thermal_print():
         # ------------------------------------------------
         # Convert PDF → Images
         # ------------------------------------------------
-        images = convert_from_path(TEMP_PDF, dpi=203)
+        # images = convert_from_path(TEMP_PDF, dpi=203)
+        images = convert_from_path(
+            TEMP_PDF,
+            dpi=203,
+            poppler_path=r"C:\poppler\Library\bin"
+        )
 
         max_width_px = 576 if paper_width == 80 else 384
 
