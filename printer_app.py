@@ -111,6 +111,10 @@ def thermal_print():
         # ------------------------------------------------
         # Decode PDF
         # ------------------------------------------------
+        # pdf_bytes = base64.b64decode(pdf_base64)
+        if isinstance(pdf_base64, str):
+            pdf_base64 = pdf_base64.encode("utf-8")
+
         pdf_bytes = base64.b64decode(pdf_base64)
         with open(TEMP_PDF, "wb") as f:
             f.write(pdf_bytes)

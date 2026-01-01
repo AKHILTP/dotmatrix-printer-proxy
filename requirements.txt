@@ -4,3 +4,6 @@ waitress
 python-escpos
 pdf2image
 pillow
+pyusb
+requests
+
